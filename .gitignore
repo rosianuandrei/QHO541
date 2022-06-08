@@ -1,2 +1,5 @@
 # Ignore node_modules folder
 api/node_modules
+
+# Ignore node_modules folder
+reactapp/node_modules
