@@ -17,4 +17,4 @@ const getById = async (id) => {
 
 
 
-module.exports = {addUser, getAll}; 
+module.exports = {addUser, getAll, getById}; 
