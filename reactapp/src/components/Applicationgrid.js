@@ -2,8 +2,11 @@ import React from 'react';
 import { Row, Col } from "antd";
 import ApplicationCard from "./ApplicationCard";
 import { status, json } from '../utilities/requestHandlers';
+import UserContext from '../contexts/user';
 
 class ApplicationGrid extends React.Component {
+
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -13,7 +16,13 @@ class ApplicationGrid extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://localhost:3000/api/applications')
+        console.log(this.context.user.password);
+        fetch('https://localhost:3000/api/applications', {
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
+            }
+        })
         .then(status)
         .then(json)
         .then(data => {
