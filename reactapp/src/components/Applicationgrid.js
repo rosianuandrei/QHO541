@@ -1,58 +1,44 @@
-import { Card, Row, Col } from "antd";
+import React from 'react';
+import { Row, Col } from "antd";
+import ApplicationCard from "./ApplicationCard";
 
-import { Link } from 'react-router-dom';
-const { Meta } = Card;
+class ApplicationGrid extends React.Component {
 
-function ApplicationGrid(props) {
-    return (
-        <>
+    constructor(props) {
+        super(props);
+        this.state = {
+            applications: []
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            applications: require('../data/applications.json')
+        })
+    }
+
+    render() {
+        if(!this.state.applications.length) {
+            return <h3>Loading applications...</h3>
+        }
+
+        const cardList = this.state.applications.map(application => {
+            return (
+                <div style={{padding:"10px"}} key={application.id}>
+                    <Col span={6}>
+                        <ApplicationCard {...application} />
+                    </Col>
+                </div>
+            )
+        });
+
+        return (
             <Row type="flex" justify="space-around">
-                <Col span={6}>
-                    <Link to="/application/1">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                    </Link>
-                </Col>
-                <Col span={6}>
-                    <Link to="/application/2">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                    </Link>
-                </Col>
-                <Col span={6}>
-                    <Link to="/application/3">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                    </Link>
-                </Col>
+                {cardList}
             </Row>
-            <Row type="flex" justify="space-around">
-                <Col span={6}>
-                    <Link to="/application/4">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                </Col>
-                <Col span={6}>
-                    <Link to="/application/5">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                    </Link>
-                </Col>
-                <Col span={6}>
-                    <Link to="/application/6">
-                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
-                            <Meta title="First Application" description="This is about something" />
-                        </Card>
-                    </Link>
-                </Col>
-            </Row>
-        </>
-    );
+        );
+    }
 }
+
 
 export default ApplicationGrid;

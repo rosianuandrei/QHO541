@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -7,25 +8,27 @@ class ApplicationCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clicked: 0
+            clicked: props.id
         }
         this.handleNav = this.handleNav.bind(this);
     }
 
     handleNav() {
-        this.setState({clicked: clicked++});
+        this.setState({clicked: this.props.id});
         console.log(this.state.clicked);
     }
 
     render() {
         return (
-            <Card
-                style={{ width: 320 }}
-                cover={<img alt="test" src={this.props.imgURL} onClick={this.handleNav} />}
-                hoverable={true}>
+            <Link to={`/application/${this.props.id}` } {...this.props}>
+                <Card
+                    style={{ width: 320 }}
+                    cover={<img alt="test" src={this.props.imgURL} onClick={this.handleNav} />}
+                    hoverable={true}>
 
-                <Meta title={this.props.title} description={this.props.summary} />
-            </Card>
+                    <Meta title={this.props.companyname} description={this.props.description} />
+                </Card>
+            </Link>
         );
     }
 }

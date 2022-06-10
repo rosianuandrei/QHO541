@@ -1,0 +1,34 @@
+[
+    {
+        "id": "1",
+        "companyname": "Test1",
+        "description": "lorem ipsum safijow"
+    },
+    {
+        "id": "2",
+        "companyname": "Test2",
+        "description": "lorem ipsum safijow"
+    },
+    {
+        "id": "3",
+        "companyname": "Test3",
+        "description": "lorem ipsum safijow"
+    },
+    {
+        "id": "4",
+        "companyname": "Test4",
+        "description": "lorem ipsum safijow"
+    },
+    {
+        "id": "5",
+        "companyname": "Test5",
+        "description": "lorem ipsum safijow"
+    },
+    {
+        "id": "6",
+        "companyname": "Test6",
+        "description": "lorem ipsum safijow"
+    }
+
+
+]
