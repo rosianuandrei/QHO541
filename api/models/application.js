@@ -1,3 +1,9 @@
 const db = require('../helpers/database');
 
-module.exports = {};
+const addApplication = async (application) => {
+    let result = await db.insert(application).into('applications').returning('*').catch((err) => err);
+    console.log(result);
+    return result;
+}
+
+module.exports = {addApplication};
