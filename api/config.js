@@ -3,7 +3,7 @@ const config = {
     connection: {
         host : 'ec2-34-225-159-178.compute-1.amazonaws.com',
         user : 'ojewmrompuemji',
-        password : '12345',
+        password : '1234567',
         database : 'd80poge5f70ke8'
     }
 };
