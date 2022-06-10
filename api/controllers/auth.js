@@ -1,5 +1,5 @@
 const passport = require('passport');
-const basicAuth = require('./strategies/basic');
+const basicAuth = require('../strategies/basic');
 
 passport.use(basicAuth);
 

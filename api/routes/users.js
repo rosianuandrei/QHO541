@@ -1,5 +1,6 @@
 const express = require('express');
 const usersModel = require('../models/users');
+const auth = require('../controllers/auth');
 const router = express.Router()
 
 router.use(express.json());
@@ -70,10 +71,24 @@ const deleteUser = async (req, res) => {
     }
 }
 
-router.get('/:id', getById);
+const getApplicationsByUser = async (req, res) => {
+    let { id } = req.params;
+    let result = await usersModel.getApplicationsByUser(id)
+    if (Array.isArray(result) && result.length) {
+        return res.status(200).json(result);
+    } else if (Array.isArray(result) && result.length === 0) {
+        return res.status(404).json('No applications found on this user');
+    } else {
+        return res.status(500).json('Error found when getting applications by user ID');
+    }
+}
+
+
+router.get('/:id', auth, getById);
 router.post('/', createUser);
-router.put('/:id', updateUser);
-router.get('/', getAll);
-router.delete('/:id', deleteUser);
+router.put('/:id', auth, updateUser);
+router.get('/', auth, getAll);
+router.delete('/:id', auth, deleteUser);
+router.get('/:id/applications', auth, getApplicationsByUser)
 
 module.exports = router; 

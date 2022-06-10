@@ -26,10 +26,7 @@ const updateApplication = async (application, id) => {
     return result;
 }
 
-const getApplicationsByUser = async (id) => {
-    let result = await db('applications').join('users', 'applications.userid', '=', 'users.id').select('applications.*', 'users.firstname', 'users.lastname').where('applications.userid', '=', id).catch((err) => err);
-    return result;
-}
 
 
-module.exports = {addUser, getAll, getById, updateUser, deleteUser, getApplicationsByUser};
+
+module.exports = {addApplication, getAll, getById, deleteById, updateApplication};
