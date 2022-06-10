@@ -29,7 +29,7 @@ class ApplicationGrid extends React.Component {
                 this.setState({ applications: data })
             })
             .catch(err => console.log("error fetching articles", err));
-        } else {
+        } else if (this.context.user.role === 'user'){
             fetch(this.context.user.links.applications, {
             method: "GET",
             headers: {
