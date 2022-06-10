@@ -48,7 +48,7 @@ class Account extends React.Component {
                     className="site-page-header-ghost-wrapper"
                     title={`Account details page of: ${this.context.user.username}`}
                 />
-                 <Tabs defaultActiveKey='1' onChange={this.callback}>
+                 <Tabs defaultActiveKey='1' onChange={this.callback} style={{height: '78vh'}}>
                         <TabPane tab="Account Details" key="1">
                             <div>
                                 <Descriptions

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from "antd";
 import ApplicationCard from "./ApplicationCard";
-//import { status, json } from '../utilities/requestHandlers';
+
 import UserContext from '../contexts/user';
 
 class ApplicationGrid extends React.Component {
@@ -13,35 +13,7 @@ class ApplicationGrid extends React.Component {
         console.log(props);
     }
 
-    /*componentDidMount() {
-        if (this.context.user.role === 'admin') {
-            fetch('https://localhost:3000/api/applications', {
-                method: "GET",
-                headers: {
-                    "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
-                }
-            })
-            .then(status)
-            .then(json)
-            .then(data => {
-                this.setState({ applications: data })
-            })
-            .catch(err => console.log("error fetching articles", err));
-        } else if (this.context.user.role === 'user'){
-            fetch(this.context.user.links.applications, {
-            method: "GET",
-            headers: {
-                "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
-            }
-            })
-            .then(status)
-            .then(json)
-            .then(data => {
-                this.setState({ applications: data })
-            })
-            .catch(err => console.log("error fetching applications", err));
-        }
-    }*/
+    
 
     render() {
         if(!this.props.applications.length) {

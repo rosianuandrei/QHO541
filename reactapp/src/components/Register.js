@@ -79,7 +79,7 @@ class Register extends React.Component {
 
     render() {
         return (
-            <Form {...formItemLayout} name="register" onFinish={this.onFinish} scrollToFirstError>
+            <Form style={{paddingTop: '2rem', height: '85vh'}} {...formItemLayout} name="register" onFinish={this.onFinish} scrollToFirstError>
                 <Form.Item name="firstname" label="First Name" rules={firstnameRules}>
                     <Input />
                 </Form.Item>

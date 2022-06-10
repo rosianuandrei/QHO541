@@ -14,19 +14,18 @@ class ApplicationCard extends React.Component {
     }
 
     handleNav() {
-        this.setState({clicked: this.props.id});
-        console.log(this.state.clicked);
+        this.setState({ clicked: this.props.id });
     }
 
     render() {
         return (
-            <Link to={`/application/${this.props.id}` } {...this.props}>
+            <Link to={`/application/${this.props.id}`} {...this.props}>
                 <Card
                     style={{ width: 320 }}
-                    cover={<img alt="test" src={this.props.imgURL} onClick={this.handleNav} />}
+
                     hoverable={true}>
 
-                    <Meta title={this.props.companyname} description={this.props.status} />
+                    <Meta title={this.props.companyname} description={`Status: ${this.props.status}`} />
                 </Card>
             </Link>
         );
