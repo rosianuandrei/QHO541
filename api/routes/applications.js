@@ -6,7 +6,6 @@ router.use(express.json());
 
 const createApplication = async (req, res) => {
     let result = await applicationsModel.addApplication(req.body);
-    console.log(result);
     if (Array.isArray(result)) {
         return res.status(200).json(result);
     } else if (result.severity === 'ERROR') {
@@ -37,8 +36,21 @@ const getByIdApplications = async (req, res) => {
     }
 }
 
+const deleteApplication = async (req, res) => {
+    let { id } = req.params;
+    let result = await applicationsModel.deleteById(id).catch((err) => console.log(err));
+    if (result) {
+        return res.status(200).json('Application deleted succesfully');
+    } else if (result === undefined) {
+        return res.status(500).json(`Error when deleting an application with ID = ${id}`);
+    } else {
+        return res.status(400).json(`No application found to delete with ID = ${id}`);
+    }
+}
+
 router.post('/', createApplication);
 router.get('/', getAllApplications);
 router.get('/:id', getByIdApplications);
+router.delete('/:id', deleteApplication);
 
 module.exports = router;

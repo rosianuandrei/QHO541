@@ -16,4 +16,10 @@ const getById = async (id) => {
     return result;
 }
 
-module.exports = {addApplication, getAll, getById};
+const deleteById = async (id) => {
+    let result = await db('applications').del().where('id', '=', id);
+    return result;
+}
+
+
+module.exports = {addApplication, getAll, getById, deleteById};
