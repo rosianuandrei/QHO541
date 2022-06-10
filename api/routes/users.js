@@ -2,6 +2,7 @@ const express = require('express');
 const usersModel = require('../models/users');
 const auth = require('../controllers/auth');
 const router = express.Router()
+const {validateUser, validateUserUpdate} = require('../controllers/validation');
 
 router.use(express.json());
 
@@ -85,8 +86,8 @@ const getApplicationsByUser = async (req, res) => {
 
 
 router.get('/:id', auth, getById);
-router.post('/', createUser);
-router.put('/:id', auth, updateUser);
+router.post('/', validateUser, createUser);
+router.put('/:id', validateUserUpdate, auth, updateUser);
 router.get('/', auth, getAll);
 router.delete('/:id', auth, deleteUser);
 router.get('/:id/applications', auth, getApplicationsByUser)
