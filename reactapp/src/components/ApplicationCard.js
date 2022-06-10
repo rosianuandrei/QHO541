@@ -26,7 +26,7 @@ class ApplicationCard extends React.Component {
                     cover={<img alt="test" src={this.props.imgURL} onClick={this.handleNav} />}
                     hoverable={true}>
 
-                    <Meta title={this.props.companyname} description={this.props.description} />
+                    <Meta title={this.props.companyname} description={this.props.status} />
                 </Card>
             </Link>
         );

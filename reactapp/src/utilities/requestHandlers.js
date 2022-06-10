@@ -19,3 +19,5 @@ function status(response) {
 function json(response) {
     return response.json(); // returns a promise
 }
+
+module.exports = {status, json};
