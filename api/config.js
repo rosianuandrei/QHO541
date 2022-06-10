@@ -1,10 +1,10 @@
 const config = {
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
-        user : 'postgres',
-        password : '12345',
-        database : 'postgres'
+        host : 'https://mysterious-wildwood-43310.herokuapp.com/',
+        user : 'postgresql-curly-06855',
+        password : '',
+        database : 'postgresql-curly-06855'
     }
 };
 
