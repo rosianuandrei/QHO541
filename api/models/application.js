@@ -7,7 +7,6 @@ const addApplication = async (application) => {
 
 const getAll = async () => {
     let result = await db.select('*').from('applications');
-    console.log(result);
     return result;
 }
 

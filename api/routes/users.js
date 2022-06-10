@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
 
 const getAll = async (req, res) => {
     const permission = can.readAll(req.user);
+    console.log(permission);
     if (!permission.granted) {
         res.status(403).json("You don't have permission");
     } else {
