@@ -61,10 +61,23 @@ const updateApplication = async (req, res) => {
 
 }
 
+const getApplicationsByUser = async (req, res) => {
+    let { id } = req.params;
+    let result = await usersModel.getApplicationsByUser(id)
+    if (Array.isArray(result) && result.length) {
+        return res.status(200).json(result);
+    } else if (Array.isArray(result) && result.length === 0) {
+        return res.status(404).json('No applications found on this user');
+    } else {
+        return res.status(500).json('Error found when getting applications by user ID');
+    }
+}
+
 router.post('/', createApplication);
 router.get('/', getAllApplications);
 router.get('/:id', getByIdApplications);
 router.delete('/:id', deleteApplication);
 router.put('/:id', updateApplication);
+router.get('/:id/applications', getApplicationsByUser)
 
 module.exports = router;
