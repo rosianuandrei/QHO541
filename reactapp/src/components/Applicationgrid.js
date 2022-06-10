@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from "antd";
 import ApplicationCard from "./ApplicationCard";
-import { status, json } from '../utilities/requestHandlers';
+//import { status, json } from '../utilities/requestHandlers';
 import UserContext from '../contexts/user';
 
 class ApplicationGrid extends React.Component {
@@ -10,12 +10,10 @@ class ApplicationGrid extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            applications: []
-        }
+        console.log(props);
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         if (this.context.user.role === 'admin') {
             fetch('https://localhost:3000/api/applications', {
                 method: "GET",
@@ -43,14 +41,14 @@ class ApplicationGrid extends React.Component {
             })
             .catch(err => console.log("error fetching applications", err));
         }
-    }
+    }*/
 
     render() {
-        if(!this.state.applications.length) {
+        if(!this.props.applications.length) {
             return <h3 style={{textAlign: 'center', height: '65vh'}}>You don't have any application submitted.</h3>
         }
 
-        const cardList = this.state.applications.map(application => {
+        const cardList = this.props.applications.map(application => {
             return (
                 <div style={{padding:"10px"}} key={application.id}>
                     <Col span={6}>
