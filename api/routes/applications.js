@@ -1,7 +1,7 @@
 const express = require('express');
 const auth = require('../controllers/auth');
 const applicationsModel = require('../models/application');
-const {validateArticle} = require('../controllers/validation');
+const {validateApplication} = require('../controllers/validation');
 const router = express.Router()
 
 router.use(express.json());
@@ -64,10 +64,10 @@ const updateApplication = async (req, res) => {
 }
 
 
-router.post('/', validateArticle, auth, createApplication);
+router.post('/', validateApplication, auth, createApplication);
 router.get('/', auth, getAllApplications);
 router.get('/:id', auth, getByIdApplications);
 router.delete('/:id', auth, deleteApplication);
-router.put('/:id', validateArticle, auth, updateApplication);
+router.put('/:id', validateApplication, auth, updateApplication);
 
 module.exports = router;
