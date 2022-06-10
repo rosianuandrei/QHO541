@@ -1,17 +1,18 @@
 const express = require('express');
 const auth = require('../controllers/auth');
 const applicationsModel = require('../models/application');
+const {validateArticle} = require('../controllers/validation');
 const router = express.Router()
 
 router.use(express.json());
 
 const createApplication = async (req, res) => {
     let result = await applicationsModel.addApplication(req.body);
-    if (Array.isArray(result)) {
+    //if (Array.isArray(result)) {
         return res.status(200).json(result);
-    } else if (result.severity === 'ERROR') {
-        return res.status(500).json('An error occurred when trying to add an applicaiton');
-    }
+    //} else if (result.severity === 'ERROR') {
+        //return res.status(500).json('An error occurred when trying to add an applicaiton');
+    //}
 }
 
 const getAllApplications = async (req, res) => {
@@ -63,10 +64,10 @@ const updateApplication = async (req, res) => {
 }
 
 
-router.post('/', auth, createApplication);
+router.post('/', validateArticle, auth, createApplication);
 router.get('/', auth, getAllApplications);
 router.get('/:id', auth, getByIdApplications);
 router.delete('/:id', auth, deleteApplication);
-router.put('/:id', auth, updateApplication);
+router.put('/:id', validateArticle, auth, updateApplication);
 
 module.exports = router;
