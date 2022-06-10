@@ -15,6 +15,12 @@ const getById = async (id) => {
     return result;
 }
 
+const updateUser = async (user, id) => {
+    let result = await db('users').update(user).where('id', '=', id);
+    return result;
+}
 
 
-module.exports = {addUser, getAll, getById}; 
+
+
+module.exports = {addUser, getAll, getById, updateUser}; 
