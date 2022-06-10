@@ -2,10 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Steps, PageHeader, Descriptions } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
+import UserContext from '../contexts/user';
 
 const { Step } = Steps;
 
 class Application extends React.Component {
+    static contextType = UserContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +17,12 @@ class Application extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        fetch(`https://localhost:3000/api/applications/${id}`)
+        fetch(`https://localhost:3000/api/applications/${id}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
+            }
+        })
         .then(status)
         .then(json)
         .then(data => {
