@@ -11,4 +11,9 @@ const getAll = async () => {
     return result;
 }
 
-module.exports = {addApplication, getAll};
+const getById = async (id) => {
+    let result = await db.select('*').from('applications').where('id', '=', id);
+    return result;
+}
+
+module.exports = {addApplication, getAll, getById};

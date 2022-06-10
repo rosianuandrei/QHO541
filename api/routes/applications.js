@@ -25,7 +25,20 @@ const getAllApplications = async (req, res) => {
     }
 }
 
+const getByIdApplications = async (req, res) => {
+    let { id } = req.params;
+    let result = await applicationsModel.getById(id).catch((err) => console.log(err));
+    if (Array.isArray(result) && result.length) {
+        return res.status(200).json(result);
+    } else if (Array.isArray(result) && result.length === 0) {
+        return res.status(404).json(`No applications found with this ID = ${id}`);
+    } else {
+        return res.status(500).json(`Error found when getting applications by ID = ${id}`);
+    }
+}
+
 router.post('/', createApplication);
 router.get('/', getAllApplications);
+router.get('/:id', getByIdApplications);
 
 module.exports = router;
