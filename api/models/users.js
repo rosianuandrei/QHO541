@@ -20,7 +20,12 @@ const updateUser = async (user, id) => {
     return result;
 }
 
+const deleteUser = async (id) => {
+    let result = await db('users').del().where('id', '=', id);
+    return result;
+}
 
 
 
-module.exports = {addUser, getAll, getById, updateUser}; 
+
+module.exports = {addUser, getAll, getById, updateUser, deleteUser}; 
