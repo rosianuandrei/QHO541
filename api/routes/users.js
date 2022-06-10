@@ -16,6 +16,16 @@ const createUser = async (req, res) => {
     }
 }
 
+const getAll = async (req, res) => {
+    let result = await usersModel.getAll();
+    if (result) {
+        return res.status(200).json(result);
+    } else {
+        return res.status(404).json('No users found');
+    }
+}
+
 router.post('/', createUser);
+router.get('/', getAll);
 
 module.exports = router; 

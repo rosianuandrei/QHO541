@@ -5,5 +5,10 @@ const addUser = async (user) => {
         return result;
 }
 
+const getAll = async () => {
+    let result = await db.select('*').from('users');
+    return result;
+}
 
-module.exports = {addUser}; 
+
+module.exports = {addUser, getAll}; 
