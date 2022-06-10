@@ -4,8 +4,12 @@ const config = {
         host : 'mysterious-wildwood-43310.herokuapp.com',
         user : 'ojewmrompuemji',
         password : '1234567',
-        database : 'postgresql-curly-06855'
+        database : 'postgresql-curly-06855',
+        ssl: {
+            rejectUnauthorized: false
+        }
     },
+    debug: true,
     pool: { "min": 2,
     "max": 6,
     "createTimeoutMillis": 3000,
