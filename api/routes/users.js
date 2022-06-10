@@ -3,6 +3,7 @@ const usersModel = require('../models/users');
 const auth = require('../controllers/auth');
 const router = express.Router()
 const {validateUser, validateUserUpdate} = require('../controllers/validation');
+const can = require('../permissions/users');
 
 router.use(express.json());
 
@@ -13,19 +14,23 @@ router.use(function timeLog (req, res, next) {
 
 const createUser = async (req, res) => {
     let result = await usersModel.addUser(req.body);
-    if (Array.isArray(result)) {
-        return res.status(200).json('User created succesfully');
-    };
+    console.log(result);
+    return res.status(200).json('User created succesfully');
 }
 
 const getAll = async (req, res) => {
-    let result = await usersModel.getAll().catch((err) => console.log(err));
-    if (Array.isArray(result) && result.length) {
-        return res.status(200).json(result);
-    } else if (Array.isArray(result) && result.length === 0) {
-        return res.status(404).json('No user found');
+    const permission = can.readAll(req.user);
+    if (!permission.granted) {
+        res.status(403).json("You don't have permission");
     } else {
-        return res.status(500).json('Error found when getting users');
+        let result = await usersModel.getAll().catch((err) => console.log(err));
+        if (Array.isArray(result) && result.length) {
+            return res.status(200).json(result);
+        } else if (Array.isArray(result) && result.length === 0) {
+            return res.status(404).json('No user found');
+        } else {
+            return res.status(500).json('Error found when getting users');
+        }
     }
 }
 
@@ -34,7 +39,13 @@ const getById = async (req, res) => {
     let result = await usersModel.getById(id).catch((err) => console.log(err));
 
     if (Array.isArray(result) && result.length) {
-        return res.status(200).json(result);
+        const data = result[0];
+        let permission = can.read(req.user, data);
+        if (!permission.granted) {
+            res.status(403).json("You don't have permission");
+        } else {
+            return res.status(200).json(result);
+        } 
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(404).json('No user found');
     } else {
@@ -46,7 +57,13 @@ const updateUser = async (req, res) => {
     let { id } = req.params;
     let result = await usersModel.updateUser(req.body, id).catch((err) => console.log(err));
     if (Array.isArray(result) && result.length) {
-        return res.status(200).json(result);
+        let data = result[0];
+        const permission = can.update(req.user, data);
+        if (!permission.granted) {
+            res.status(403).json("You don't have permission");
+        } else {
+            return res.status(200).json(result);
+        }
     } else if (result === undefined) {
         return res.status(500).json('Error when updating the user');
     } else if (Array.isArray(result) && result.length === 0) {
@@ -56,13 +73,23 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     let { id } = req.params;
-    let result = await usersModel.deleteUser(id).catch((err) => console.log(err));
-    if (result) {
-        return res.status(200).json('User deleted succesfully');
-    } else if (result === undefined) {
-        return res.status(500).json('Error when deleting a user');
-    } else {
-        return res.status(400).json('No user found to delete');
+    let result = await usersModel.getById(id);
+    if (result.length) {
+        const data = result[0];
+        console.log('trying to delete', data);
+        const permission = can.delete(req.user, data);
+        if (!permission.granted) {
+            res.status(403).json("You don't have permission");
+        } else {
+            let result = await usersModel.deleteUser(id).catch((err) => console.log(err));
+            if (result) {
+                return res.status(200).json('User deleted succesfully');
+            } else if (result === undefined) {
+                return res.status(500).json('Error when deleting a user');
+            } else {
+                return res.status(400).json('No user found to delete');
+            }
+        }
     }
 }
 

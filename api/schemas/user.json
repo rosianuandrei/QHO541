@@ -32,7 +32,7 @@
                     "minLength": 6
                 }
             },
-            "required": ["username", "email", "password", "firstname", "lastname"],
+            "required": ["username", "email", "password"],
             "additionalProperties": false
         },
 
