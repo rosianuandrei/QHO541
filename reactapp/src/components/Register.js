@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
+import { status, json } from '../utilities/requestHandlers';
 
 const formItemLayout = {
     labelCol: { xs: { span: 24}, sm: { span: 6}},
@@ -54,9 +55,27 @@ class Register extends React.Component {
         this.onFinish = this.onFinish.bind(this);
     }
 
-    onFinish() {
-        console.log("test")
-    }
+    onFinish = (values) => {
+        console.log('Received values form: ', values);
+        const { confirm, ...data } = values; // ignore the 'confirm' value
+        fetch('https://localhost/api/users', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(status)
+        .then(json)
+        .then(data => {
+            console.log(data);
+            alert("User added")
+        })
+        .catch(errorResponse => {
+            console.error(errorResponse);
+            alert(`Error: ${errorResponse}`);
+        });
+    };
 
     render() {
         return (
