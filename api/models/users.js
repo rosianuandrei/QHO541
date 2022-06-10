@@ -1,7 +1,13 @@
 const db = require('../helpers/database');
+const bcrypt = require('bcrypt');
 
 const addUser = async (user) => {
-        let result = await db.insert(user).into('users');
+    const saltRounds = 10;
+    bcrypt.hash(user.password, saltRounds, async function(err, hash) {
+        user.password = hash;
+    });
+    user.passwordsalt = saltRounds;
+    let result = await db.insert(user).into('users').returning('*').catch((err) => err);
         return result;
 }
 

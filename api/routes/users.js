@@ -10,15 +10,19 @@ router.use(function timeLog (req, res, next) {
 })
 
 const createUser = async (req, res) => {
-    let result = await usersModel.addUser(req.body).catch((err) => console.log(err));
-    if (result) {
-        return res.status(200).json('User registered sucessfully');
+    let result = await usersModel.addUser(req.body);
+    if (Array.isArray(result)) {
+        result[0].password = '';
+        return res.status(200).json(result);
+    } else if (result.severity === 'ERROR') {
+        return res.status(500).json('User Exist or BAD REQUEST');
     }
 }
 
 const getAll = async (req, res) => {
     let result = await usersModel.getAll().catch((err) => console.log(err));
     if (Array.isArray(result) && result.length) {
+        result[0].password = '';
         return res.status(200).json(result);
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(404).json('No user found');
@@ -32,6 +36,7 @@ const getById = async (req, res) => {
     let result = await usersModel.getById(id).catch((err) => console.log(err));
 
     if (Array.isArray(result) && result.length) {
+        result[0].password = '';
         return res.status(200).json(result);
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(404).json('No user found');
