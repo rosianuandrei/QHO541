@@ -138,8 +138,8 @@ class Application extends React.Component {
                     </div>
 
                     <div style={{ paddingTop: '2rem' }}>
-                        <Form {...formItemLayout} name="setStatus" onFinish={this.setStatus} scrollToFirstError>
-                            <Form.Item name="status">
+                            <Form {...formItemLayout} style={{display: 'flex', justifyContent: 'center'}} name="setStatus" onFinish={this.setStatus} scrollToFirstError>
+                            <Form.Item name="status" style={{width: '30%'}}>
                                 <Select
                                     placeholder="Change Status"
                                     onChange={this.onStatusChange}
@@ -155,7 +155,7 @@ class Application extends React.Component {
                         </Form>
                     </div>
 
-                    <Steps current={this.state.progress} style={{ paddingBottom: "27rem", paddingTop: "5rem" }}>
+                    <Steps current={this.state.progress} style={{height: "60vh", paddingTop: "5rem" }}>
                         <Step title="New" description="This is a description." />
                         <Step title="Pending" description="This is another description" />
                         <Step title="Accepted/Rejected" description="This is another description" status={this.state.statusApp} />

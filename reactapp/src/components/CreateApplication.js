@@ -69,7 +69,7 @@ class createApplication extends React.Component {
             return <Redirect to={this.state.redirect} />
         }
         return (
-            <Form {...formItemLayout} name="createApplication" onFinish={this.onFinish} scrollToFirstError>
+            <Form style={{paddingTop: '2rem', height: '85vh'}} {...formItemLayout} name="createApplication" onFinish={this.onFinish} scrollToFirstError>
                 <Form.Item name="companyname" label="Company Name" rules={companyNameRules}>
                     <Input />
                 </Form.Item>
