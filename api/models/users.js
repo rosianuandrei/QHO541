@@ -41,7 +41,7 @@ const deleteUser = async (id) => {
 }
 
 const findByUsername = async (username) => {
-    let result = await db.select('*').from('users').where('username', '=', username).transacting(trx);
+    let result = await db.select('*').from('users').where('username', '=', username);
     return result;
 }
 
