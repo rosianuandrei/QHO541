@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from "antd";
 import ApplicationCard from "./ApplicationCard";
+import { status, json } from '../utilities/requestHandlers';
 
 class ApplicationGrid extends React.Component {
 
@@ -12,9 +13,13 @@ class ApplicationGrid extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            applications: require('../data/applications.json')
+        fetch('https://localhost:3000/api/applications')
+        .then(status)
+        .then(json)
+        .then(data => {
+            this.setState({ applications: data })
         })
+        .catch(err => console.log("error fetching articles", err));
     }
 
     render() {
