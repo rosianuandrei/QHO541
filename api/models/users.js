@@ -31,7 +31,12 @@ const deleteUser = async (id) => {
     return result;
 }
 
+const findByUsername = async (username) => {
+    let result = await db.select('*').from('users').where('username', '=', username);
+    return result;
+}
 
 
 
-module.exports = {addUser, getAll, getById, updateUser, deleteUser}; 
+
+module.exports = {addUser, getAll, getById, updateUser, deleteUser, findByUsername}; 
