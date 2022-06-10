@@ -4,6 +4,7 @@ const auth = require('../controllers/auth');
 const router = express.Router()
 const {validateUser, validateUserUpdate} = require('../controllers/validation');
 const can = require('../permissions/users');
+const cors = require('cors');
 
 router.use(express.json());
 
@@ -106,9 +107,19 @@ const getApplicationsByUser = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    const {id, username, email, role, firstname, dateregistered, lastname} = req.user;
+    const links = {
+        self: `${req.protocol}s://${req.host}/api/users/${id}`,
+        applications: `${req.protocol}s://${req.host}/api/users/${id}/applications`
+    }
+    res.json({id, username, email, role, firstname, lastname, dateregistered, links})
+}
+
 
 router.get('/:id', auth, getById);
 router.post('/', validateUser, createUser);
+router.post('/login', auth, login);
 router.put('/:id', validateUserUpdate, auth, updateUser);
 router.get('/', auth, getAll);
 router.delete('/:id', auth, deleteUser);

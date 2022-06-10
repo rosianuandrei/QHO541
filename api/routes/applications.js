@@ -4,8 +4,10 @@ const applicationsModel = require('../models/application');
 const {validateApplication} = require('../controllers/validation');
 const router = express.Router()
 const can = require('../permissions/applications');
+const cors = require('cors');
 
 router.use(express.json());
+router.use(cors());
 
 const createApplication = async (req, res) => {
     let result = await applicationsModel.addApplication(req.body);
@@ -89,7 +91,7 @@ const updateApplication = async (req, res) => {
 }
 
 
-router.post('/', validateApplication, auth, createApplication);
+router.post('/', auth, validateApplication, createApplication);
 router.get('/', auth, getAllApplications);
 router.get('/:id', auth, getByIdApplications);
 router.delete('/:id', auth, deleteApplication);

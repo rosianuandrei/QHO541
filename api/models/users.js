@@ -17,13 +17,21 @@ const getAll = async () => {
 }
 
 const getById = async (id) => {
-    let result = await db.select(['id', 'firstname', 'lastname', 'username', 'dateregistered', 'role']).from('users').where('id', '=', id);
+    let result = await db.select(['id', 'firstname', 'email', 'lastname', 'username', 'dateregistered', 'role']).from('users').where('id', '=', id);
     return result;
 }
 
 const updateUser = async (user, id) => {
-    let result = await db('users').update(user).where('id', '=', id).returning(['id', 'firstname', 'lastname', 'username', 'dateregistered', 'role']);
-    return result;
+    if (user.password.length) {
+        const saltRounds = 10;
+        const hash = bcrypt.hashSync(user.password, saltRounds);
+        user.password = hash;
+        let result = await db('users').update(user).where('id', '=', id).returning(['id', 'firstname', 'lastname', 'username', 'dateregistered', 'role']);
+        return result;
+    } else {
+        let result = await db('users').update(user).where('id', '=', id).returning(['id', 'firstname', 'lastname', 'username', 'dateregistered', 'role']);
+        return result;
+    }
 }
 
 const deleteUser = async (id) => {
