@@ -5,13 +5,9 @@ const config = {
         user : 'ojewmrompuemji',
         password : '1234567',
         database : 'postgresql-curly-06855',
-        ssl: {
-            rejectUnauthorized: false
-        }
     },
-    debug: true,
-    pool: { "min": 2,
-    "max": 6,
+    pool: { "min": 0,
+    "max": 10000,
     "createTimeoutMillis": 3000,
     "acquireTimeoutMillis": 30000,
     "idleTimeoutMillis": 30000,
