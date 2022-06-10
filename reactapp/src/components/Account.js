@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Steps, PageHeader, Descriptions } from 'antd';
+import { PageHeader, Descriptions } from 'antd';
 import UserContext from '../contexts/user';
-import { status, json } from '../utilities/requestHandlers';
+
 
 const { Step } = Steps;
 
