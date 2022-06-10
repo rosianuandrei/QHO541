@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
 import UserContext from '../contexts/user';
+import { Redirect } from 'react-router-dom';
 
 const formItemLayout = {
     labelCol: { xs: {span : 24}, sm: { span: 6 }},
@@ -31,6 +32,8 @@ class Login extends React.Component {
         this.login = this.login.bind(this);
     }
 
+    state = {redirect: null}
+
     login(values) {
         const {username, password} = values;
         console.log(`logging in user: ${username}`)
@@ -45,7 +48,9 @@ class Login extends React.Component {
         .then(user => {
             console.log('Logged in succesfully');
             console.log(user);
+            user.password = password;
             this.context.login(user);
+            this.setState({redirect: '/'});
         })
         .catch(error => {
             console.log('Login failed');
@@ -53,6 +58,10 @@ class Login extends React.Component {
     }
 
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
         return (
             <Form {...formItemLayout} name="login" onFinish={this.login} scrollToFirstError>
                 <Form.Item name="username" label="Username" rules={usernameRules}>
@@ -61,8 +70,8 @@ class Login extends React.Component {
                 <Form.Item name="password" label="Password" rules={passwordRules} hasFeedback>
                     <Input.Password />
                 </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Login</Button>
+                <Form.Item {...tailFormItemLayout} >
+                    <Button  type="primary" htmlType="submit">Login</Button>
                 </Form.Item>
             </Form>
         );

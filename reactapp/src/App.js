@@ -40,6 +40,8 @@ class App extends React.Component {
     this.setState({user: {loggedIn: false}});
   }
 
+  
+
   render() {
 
     const context = {
@@ -47,6 +49,8 @@ class App extends React.Component {
       login: this.login,
       logout: this.logout
     };
+
+    console.log(context.user);
     
     return (
       <>
@@ -62,7 +66,7 @@ class App extends React.Component {
                   <Route path='/account' children={<Account />} />
                   <Route path='/application/:id' children={<Application />} />
                   <Route path='/register' children={<Register />} />
-                  <Route path='/login' children={<Login />} />
+                  <Route path='/login' children={<Login></Login>} />
                   <Route path='/create' children={<CreateApplication />} />
                   <Route path='/' children={<Home />} />
                 </Switch>
