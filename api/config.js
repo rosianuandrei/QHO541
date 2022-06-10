@@ -4,7 +4,7 @@ const config = {
         host : 'ec2-34-225-159-178.compute-1.amazonaws.com',
         user : 'ojewmrompuemji',
         password : '1234567',
-        database : 'd80poge5f70ke8'
+        database : 'postgresql-curly-06855'
     }
 };
 
