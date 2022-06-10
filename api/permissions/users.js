@@ -5,7 +5,7 @@ const ac = new AccessControl();
 ac.grant('user').condition({Fn:'EQUALS', args: {'requester':'$.owner'}}).execute('read')
 .on('user', ['*', '!password', '!passwordSalt']);
 ac.grant('user').condition({Fn:'EQUALS', args: {'requester':'$.owner'}}).execute('update')
-.on('user', ['firstName', 'lastName', 'password', 'email']);
+.on('user', ['firstname', 'lastname', 'password', 'email']);
 
 ac.grant('admin').execute('read').on('user');
 ac.grant('admin').execute('read').on('users');
@@ -13,7 +13,7 @@ ac.grant('admin').execute('update').on('user');
 ac.grant('admin').condition({Fn:'NOT_EQUALS', args:{'requester':'$.owner'}}).execute('delete').on('user');
 
 exports.readAll = (requester) =>
-//ac.can(requester.role).execute('read').sync().on('users');
+ac.can(requester.role).execute('read').sync().on('users');
 
 exports.read = (requester, data) =>
 ac.can(requester.role).context({requester:requester.id, owner:data.id}).execute('read').sync().on('user');
