@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
+import UserContext from '../contexts/user';
 
 const formItemLayout = {
     labelCol: { xs: {span : 24}, sm: { span: 6 }},
@@ -23,6 +24,7 @@ const usernameRules = [
  * Login form component to login in the app
  */
 class Login extends React.Component {
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -43,6 +45,7 @@ class Login extends React.Component {
         .then(user => {
             console.log('Logged in succesfully');
             console.log(user);
+            this.context.login(user);
         })
         .catch(error => {
             console.log('Login failed');
