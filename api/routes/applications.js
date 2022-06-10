@@ -48,9 +48,23 @@ const deleteApplication = async (req, res) => {
     }
 }
 
+const updateApplication = async (req, res) => {
+    let { id } = req.params;
+    let result = await applicationsModel.updateApplication(req.body, id).catch((err) => console.log(err));
+    if (Array.isArray(result) && result.length) {
+        return res.status(200).json(result);
+    } else if (result === undefined) {
+        return res.status(500).json(`Error when updating the application with ID = ${id}`);
+    } else if (Array.isArray(result) && result.length === 0) {
+        return res.status(400).json(`No application found to update with ID = ${id}`);
+    }
+
+}
+
 router.post('/', createApplication);
 router.get('/', getAllApplications);
 router.get('/:id', getByIdApplications);
 router.delete('/:id', deleteApplication);
+router.put('/:id', updateApplication);
 
 module.exports = router;

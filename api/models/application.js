@@ -21,5 +21,10 @@ const deleteById = async (id) => {
     return result;
 }
 
+const updateApplication = async (application, id) => {
+    let result = await db('applications').update(application).where('id', '=', id).returning('*');
+    return result;
+}
 
-module.exports = {addApplication, getAll, getById, deleteById};
+
+module.exports = {addApplication, getAll, getById, deleteById, updateApplication};
