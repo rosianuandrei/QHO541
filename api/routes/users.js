@@ -121,7 +121,7 @@ router.get('/:id', auth, getById);
 router.post('/', validateUser, createUser);
 router.post('/login', auth, login);
 router.put('/:id', validateUserUpdate, auth, updateUser);
-router.get('/', auth, getAll);
+router.get('/', getAll);
 router.delete('/:id', auth, deleteUser);
 router.get('/:id/applications', auth, getApplicationsByUser)
 
