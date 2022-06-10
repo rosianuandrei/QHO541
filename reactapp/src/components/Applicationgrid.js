@@ -1,4 +1,6 @@
 import { Card, Row, Col } from "antd";
+
+import { Link } from 'react-router-dom';
 const { Meta } = Card;
 
 function ApplicationGrid(props) {
@@ -6,36 +8,47 @@ function ApplicationGrid(props) {
         <>
             <Row type="flex" justify="space-around">
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="First Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/1">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
+                    </Link>
                 </Col>
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="Second Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/2">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
+                    </Link>
                 </Col>
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="Third Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/3">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
+                    </Link>
                 </Col>
             </Row>
             <Row type="flex" justify="space-around">
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="Fourth Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/4">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
                 </Col>
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="Fifth Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/5">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
+                    </Link>
                 </Col>
                 <Col span={6}>
-                    <Card cover={<img alt="test" src="https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg" />}>
-                        <Meta title="Sixth Application" description="This is about something" />
-                    </Card>
+                    <Link to="/application/6">
+                        <Card cover={<img alt="test" src="https://pngimg.com/uploads/whatsapp/small/whatsapp_PNG95162.png" />}>
+                            <Meta title="First Application" description="This is about something" />
+                        </Card>
+                    </Link>
                 </Col>
             </Row>
         </>
