@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
 import UserContext from '../contexts/user';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 const formItemLayout = {
     labelCol: { xs: {span : 24}, sm: { span: 6 }},

@@ -1,10 +1,8 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-import { Steps, PageHeader, Descriptions } from 'antd';
+import { Redirect, withRouter } from 'react-router';
 import { Form, Input, Button, Steps, Select, PageHeader, Descriptions, Tabs } from 'antd';
 import { status, json } from '../utilities/requestHandlers';
 import UserContext from '../contexts/user';
-import { Redirect } from 'react-router-dom';
 
 const { Option } = Select;
 
