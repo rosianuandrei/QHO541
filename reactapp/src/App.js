@@ -50,7 +50,30 @@ class App extends React.Component {
       logout: this.logout
     };
 
-    console.log(context.user);
+    if (!this.state.user.loggedIn) {
+      return (
+        <Layout className="layout">
+          <UserContext.Provider value={context}>
+            <Router>
+              <Header>
+                <Nav />
+              </Header>
+  
+              <Content>
+                <Switch>
+                  <Route path='/register' children={<Register />} />
+                  <Route path='/login' children={<Login></Login>}  />
+                  <Route path='/' children={<Home />} />
+                </Switch>
+              </Content>
+  
+              <Footer style={{ textAlign: 'center' }}>Created for QHO541</Footer>
+  
+            </Router>
+          </UserContext.Provider>
+        </Layout>
+      )
+    }
     
     return (
       <>
