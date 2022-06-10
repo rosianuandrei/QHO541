@@ -2,7 +2,6 @@ const { Validator, ValidationError } = require('jsonschema');
 const applicationSchema = require('../schemas/applications.json').definitions.application;
 const userSchema = require('../schemas/user.json').definitions.user;
 const userUpdateSchema = require('../schemas/user.json').definitions.userUpdate;
-const UserViewSchema = require('../schemas/user.json').definitions.userView;
 
 const makeExpressValidator = (schema, resource) => {
 
@@ -33,4 +32,3 @@ return handler;
 module.exports.validateApplication = makeExpressValidator(applicationSchema, 'application');
 module.exports.validateUser = makeExpressValidator(userSchema, 'user');
 module.exports.validateUserUpdate = makeExpressValidator(userUpdateSchema, 'userUpdate');
-module.exports.validateUserView = makeExpressValidator(UserViewSchema, 'userView');
