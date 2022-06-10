@@ -155,10 +155,10 @@ class Application extends React.Component {
                         </Form>
                     </div>
 
-                    <Steps current={this.state.progress} style={{height: "60vh", paddingTop: "5rem" }}>
-                        <Step title="New" description="This is a description." />
-                        <Step title="Pending" description="This is another description" />
-                        <Step title="Accepted/Rejected" description="This is another description" status={this.state.statusApp} />
+                    <Steps responsive current={this.state.progress} style={{height: "60vh", paddingTop: "5rem" }}>
+                        <Step title="New" description="The application is not reviewed" />
+                        <Step title="Pending" description="The application is currently reviewing" />
+                        <Step title="Accepted/Rejected" description="red/blue: Rejected/Accepted" status={this.state.statusApp} />
                     </Steps>
                 </>
             );
