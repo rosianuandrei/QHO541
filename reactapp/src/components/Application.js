@@ -63,7 +63,7 @@ class Application extends React.Component {
     }
 
     onFinish = (value) => {
-        fetch(`https://quiz-epoxy-3000.codio-box.uk/api/applications/${this.props.match.params.id}`, {
+        fetch(`https://localhost:3000/api/applications/${this.props.match.params.id}`, {
             method: "PUT",
             body: JSON.stringify(value),
             headers: {
@@ -84,7 +84,7 @@ class Application extends React.Component {
     }
 
     setStatus = (value) => {
-        fetch(`https://quiz-epoxy-3000.codio-box.uk/api/applications/${this.props.match.params.id}`, {
+        fetch(`https://localhost:3000/api/applications/${this.props.match.params.id}`, {
             method: "PUT",
             body: JSON.stringify(value),
             headers: {
