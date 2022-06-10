@@ -57,9 +57,11 @@ class createApplication extends React.Component {
         .then(status)
         .then(json)
         .then(application => {
+            alert('Application was added. You will be redirected to homepage')
             this.setState({redirect: '/'});
         })
         .catch(error => {
+            alert('Username/Password incorrect')
             console.log(error);
         });
     }
