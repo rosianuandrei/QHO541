@@ -67,11 +67,11 @@
             "description": "Data a user can update (excludes username).",
             "type": "object",
             "properties": {
-                "firstName": {
+                "firstname": {
                 "description": "First name",
                 "type": "string"
                 },
-                "lastName": {
+                "lastname": {
                 "description": "Last name",
                 "type": "string"
                 },

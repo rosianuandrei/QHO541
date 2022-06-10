@@ -5,24 +5,23 @@ const addUser = async (user) => {
     const saltRounds = 10;
     bcrypt.hash(user.password, saltRounds, async function(err, hash) {
         user.password = hash;
-    });
-    user.passwordsalt = saltRounds;
-    let result = await db.insert(user).into('users').returning('*').catch((err) => err);
+        user.passwordsalt = saltRounds;
+        let result = await db.insert(user).into('users').returning('*').catch((err) => err);
         return result;
+    });
 }
 
 const getAll = async () => {
-    let result = await db.select('*').from('users');
-    return result;
+    let result = await db.select(['id', 'firstname', 'lastname', 'username', 'dateregistered']).from('users');    return result;
 }
 
 const getById = async (id) => {
-    let result = await db.select('*').from('users').where('id', '=', id);
+    let result = await db.select(['id', 'firstname', 'lastname', 'username', 'dateregistered']).from('users').where('id', '=', id);
     return result;
 }
 
 const updateUser = async (user, id) => {
-    let result = await db('users').update(user).where('id', '=', id).returning('*');
+    let result = await db('users').update(user).where('id', '=', id).returning(['id', 'firstname', 'lastname', 'username', 'dateregistered']);
     return result;
 }
 

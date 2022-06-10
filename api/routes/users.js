@@ -14,17 +14,13 @@ router.use(function timeLog (req, res, next) {
 const createUser = async (req, res) => {
     let result = await usersModel.addUser(req.body);
     if (Array.isArray(result)) {
-        result[0].password = '';
-        return res.status(200).json(result);
-    } else if (result.severity === 'ERROR') {
-        return res.status(500).json('User Exist or BAD REQUEST');
-    }
+        return res.status(200).json('User created succesfully');
+    };
 }
 
 const getAll = async (req, res) => {
     let result = await usersModel.getAll().catch((err) => console.log(err));
     if (Array.isArray(result) && result.length) {
-        result[0].password = '';
         return res.status(200).json(result);
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(404).json('No user found');
@@ -38,7 +34,6 @@ const getById = async (req, res) => {
     let result = await usersModel.getById(id).catch((err) => console.log(err));
 
     if (Array.isArray(result) && result.length) {
-        result[0].password = '';
         return res.status(200).json(result);
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(404).json('No user found');
@@ -51,7 +46,6 @@ const updateUser = async (req, res) => {
     let { id } = req.params;
     let result = await usersModel.updateUser(req.body, id).catch((err) => console.log(err));
     if (Array.isArray(result) && result.length) {
-        result[0].password = '';
         return res.status(200).json(result);
     } else if (result === undefined) {
         return res.status(500).json('Error when updating the user');
