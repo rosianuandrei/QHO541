@@ -5,7 +5,8 @@ const config = {
         user : 'ojewmrompuemji',
         password : '1234567',
         database : 'postgresql-curly-06855'
-    }
+    },
+    pool: { min: 0, max: 30, acquireTimeoutMillis: 60 * 1000 }
 };
 
 module.exports = config;
