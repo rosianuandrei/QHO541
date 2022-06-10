@@ -1,4 +1,5 @@
 const express = require('express');
+const applicationsModel = require('../models/applications');
 const router = express.Router()
 
 router.use(express.json());
