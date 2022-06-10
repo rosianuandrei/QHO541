@@ -22,7 +22,7 @@ const getById = async (id) => {
 }
 
 const updateUser = async (user, id) => {
-    let result = await db('users').update(user).where('id', '=', id);
+    let result = await db('users').update(user).where('id', '=', id).returning('*');
     return result;
 }
 

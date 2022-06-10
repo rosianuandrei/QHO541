@@ -48,12 +48,12 @@ const getById = async (req, res) => {
 const updateUser = async (req, res) => {
     let { id } = req.params;
     let result = await usersModel.updateUser(req.body, id).catch((err) => console.log(err));
-    if (result === 1) {
-        return res.status(200).json('User updated succesfully');
+    if (Array.isArray(result) && result.length) {
+        result[0].password = '';
+        return res.status(200).json(result);
     } else if (result === undefined) {
         return res.status(500).json('Error when updating the user');
-    }
-    else {
+    } else if (Array.isArray(result) && result.length === 0) {
         return res.status(400).json('No user found to update');
     }
 }
