@@ -11,7 +11,7 @@ const { Option } = Select;
 
 
 
-class Home extends React.Component {
+class Home extends React.Component{
     static contextType = UserContext;
 
     constructor(props) {
@@ -24,34 +24,35 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.context);
         if (this.context.user.role === 'admin') {
-            fetch('https://localhost:3000/api/applications', {
-                method: "GET",
-                headers: {
-                    "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
-                }
+            fetch('http://142.93.36.156:3000/api/applications', {
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
+            }
             })
-                .then(status)
-                .then(json)
-                .then(data => {
-                    this.setState({ applications: data })
-                })
-                .catch(err => console.log("error fetching applications", err));
+            .then(status)
+            .then(json)
+            .then(data => {
+                this.setState({ applications: data })
+            })
+            .catch(err => console.log("error fetching applications", err));
         } else if (this.context.user.role === 'user') {
             fetch(this.context.user.links.applications, {
-                method: "GET",
-                headers: {
-                    "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
-                }
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
+            }
             })
-                .then(status)
-                .then(json)
-                .then(data => {
-                    this.setState({ applications: data })
-                })
-                .catch(err => console.log("error fetching applications", err));
+            .then(status)
+            .then(json)
+            .then(data => {
+                this.setState({ applications: data })
+            })
+            .catch(err => console.log("error fetching applications", err));
         }
-
+        
     }
 
     onSearchChange = (event) => {
@@ -88,72 +89,73 @@ class Home extends React.Component {
         })
 
         if (this.context.user.loggedIn) {
-            if (this.context.user.role === 'admin') {
+            if(this.context.user.role === 'admin')
+            { 
                 return (
                     <>
-                        <div className="site-layout-content" style={{ height: '85vh' }}>
-                            <div style={{ padding: '2% 20%' }}>
-                                <Search
+                        <div className="site-layout-content" style={{height: '85vh'}}>
+                            <div style={{ padding: '2% 20%'}}>
+                                <Search 
                                     placeholder="input search text"
                                     allowClear
                                     enterButton="Search"
                                     size="large"
                                     onChange={this.onSearchChange} />
                                 <Select
-                                    placeholder="Filter Applications"
-                                    onChange={this.onStatusSearch}
-                                    allowClear
-                                    style={{ display: 'flex', justifyContent: 'center' }}>
+                                placeholder="Filter Applications"
+                                onChange={this.onStatusSearch}
+                                allowClear
+                                style={{display: 'flex', justifyContent:'center'}}>
                                     <Option value="new">New</Option>
                                     <Option value="pending">Pending</Option>
                                     <Option value="accepted">Accepted</Option>
                                     <Option value="rejected">Rejected</Option>
                                 </Select>
-                                <Title style={{ textAlign: 'center' }}>Trading License Department</Title>
-                                <h3 style={{ textAlign: 'center', paddingBottom: '2rem' }}>{`Hello, ${this.context.user.firstname} ${this.context.user.lastname}. Here are your submitted applications!`}</h3>
+                                <Title style={{textAlign: 'center'}}>Trading License Department</Title>
+                                <h3 style={{textAlign: 'center', paddingBottom: '2rem'}}>{`Hello, ${this.context.user.firstname} ${this.context.user.lastname}. Here are your submitted applications!`}</h3>
                             </div>
-                            <ApplicationGrid application={filteredApplications} />
+                            <ApplicationGrid application={filteredApplications}/>
                         </div>
                     </>
                 )
             } else {
                 return (
                     <>
-                        <div className="site-layout-content" style={{ height: '85vh' }}>
+                        <div className="site-layout-content" style={{height: '85vh'}}>
                             <header>
-                                <div style={{ padding: '1% 20%', display: 'flex', justifyContent: 'center' }}>
-                                    <PageHeader
-                                        className="site-page-header"
-                                        title="The Trading License Department"
-                                        subTitle="Welcome to the TLD." />
-                                </div>
-                                <h3 style={{ textAlign: 'center', paddingBottom: '2rem' }}>{`Hello, ${this.context.user.firstname} ${this.context.user.lastname}. Here are your submitted applications!`}</h3>
+                            <div style={{ padding: '1% 20%', display: 'flex', justifyContent: 'center' }}>
+                                <PageHeader
+                                    className="site-page-header"
+                                    title="The Trading License Department"
+                                    />
+                            </div>
+                            <h3 style={{textAlign: 'center', paddingBottom: '2rem'}}>{`Hello, ${this.context.user.firstname} ${this.context.user.lastname}. Here are your submitted applications!`}</h3>
                             </header>
-                            <ApplicationGrid application={filteredApplications} />
+                            <ApplicationGrid application={filteredApplications}/>
                         </div>
                     </>
                 )
             }
-
+            
         } else {
             return (
                 <>
-                    <div className="site-layout-content" style={{ height: '85vh' }}>
-                        <Title style={{ textAlign: 'center', paddingTop: "5rem", paddingBottom: "5rem" }}>Trading License Department</Title>
-                        <Title level={5} style={{ textAlign: 'center', paddingBottom: "3rem" }}>To submit applications or to see the status of a submitted application, please login first.</Title>
+                    <div className="site-layout-content" style={{height: '85vh'}}>
+                        <Title style={{textAlign: 'center', paddingTop: "5rem", paddingBottom: "5rem"}}>Trading License Department</Title>
+                        <Title level={5} style={{textAlign: 'center', paddingBottom: "3rem"}}>To submit applications or to see the status of a submitted application, please login first.</Title>
 
-                        <div style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
-                            <Button type="primary" style={{ width: '8rem', marginBottom: "1rem" }}><Link to='/login'>Login</Link></Button>
-                            <Button type="link"><Link to='/register'>I don't have an account. Register</Link></Button>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center'}}>
+                            <Button type="primary" style={{width: '8rem', marginBottom: "1rem"}}><Link to='/login'>Login</Link></Button>
+                            <Button type="link"><Link to ='/register'>I don't have an account. Register</Link></Button>
                         </div>
                     </div>
-
+                    
                 </>
             )
         }
     }
-
-
+    
+    
 }
 
 export default Home;

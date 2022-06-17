@@ -46,7 +46,7 @@ class createApplication extends React.Component {
         values.userid = this.context.user.id;
         values.companynumber = parseInt(values.companynumber);
         values.sic = parseInt(values.sic);
-        fetch('https://localhost:3000/api/applications', {
+        fetch('http://142.93.36.156:3000/api/applications', {
             method: "POST",
             body: JSON.stringify(values),
             headers: {

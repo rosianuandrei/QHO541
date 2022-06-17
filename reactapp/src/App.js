@@ -40,8 +40,6 @@ class App extends React.Component {
     this.setState({user: {loggedIn: false}});
   }
 
-  
-
   render() {
 
     const context = {
@@ -50,30 +48,30 @@ class App extends React.Component {
       logout: this.logout
     };
 
-    if (!this.state.user.loggedIn) {
-      return (
-        <Layout className="layout">
-          <UserContext.Provider value={context}>
-            <Router>
-              <Header>
-                <Nav />
-              </Header>
-  
-              <Content>
-                <Switch>
-                  <Route path='/register' children={<Register />} />
-                  <Route path='/login' children={<Login></Login>}  />
-                  <Route path='/' children={<Home />} />
-                </Switch>
-              </Content>
-  
-              <Footer style={{ textAlign: 'center' }}>Created for QHO541</Footer>
-  
-            </Router>
-          </UserContext.Provider>
-        </Layout>
-      )
-    }
+  if (!this.state.user.loggedIn) {
+    return (
+      <Layout className="layout">
+        <UserContext.Provider value={context}>
+          <Router>
+            <Header>
+              <Nav />
+            </Header>
+
+            <Content>
+              <Switch>
+                <Route path='/register' children={<Register />} />
+                <Route path='/login' children={<Login />}  />
+                <Route path='/' children={<Home />} />
+              </Switch>
+            </Content>
+
+            <Footer style={{ textAlign: 'center' }}>Created for QHO541</Footer>
+
+          </Router>
+        </UserContext.Provider>
+      </Layout>
+    )
+  }
     
     return (
       <>
@@ -89,7 +87,7 @@ class App extends React.Component {
                   <Route path='/account' children={<Account />} />
                   <Route path='/application/:id' children={<Application />} />
                   <Route path='/register' children={<Register />} />
-                  <Route path='/login' children={<Login></Login>} />
+                  <Route path='/login' children={<Login></Login>}  />
                   <Route path='/create' children={<CreateApplication />} />
                   <Route path='/' children={<Home />} />
                 </Switch>

@@ -16,11 +16,11 @@ class ApplicationGrid extends React.Component {
     
 
     render() {
-        if(!this.props.applications.length) {
+        if(!this.props.application.length) {
             return <h3 style={{textAlign: 'center', height: '65vh'}}>You don't have any application submitted.</h3>
         }
 
-        const cardList = this.props.applications.map(application => {
+        const cardList = this.props.application.map(application => {
             return (
                 <div style={{padding:"10px"}} key={application.id}>
                     <Col span={6}>

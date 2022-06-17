@@ -67,6 +67,7 @@ const updateUser = async (req, res) => {
             return res.status(200).json(result);
         }
     } else if (result === undefined) {
+        console.log(result);
         return res.status(500).json('Error when updating the user');
     } else if (Array.isArray(result) && result.length === 0) {
         return res.status(400).json('No user found to update');
@@ -110,8 +111,8 @@ const getApplicationsByUser = async (req, res) => {
 const login = async (req, res) => {
     const {id, username, email, role, firstname, dateregistered, lastname} = req.user;
     const links = {
-        self: `${req.protocol}s://${req.host}/api/users/${id}`,
-        applications: `${req.protocol}s://${req.host}/api/users/${id}/applications`
+        self: `${req.protocol}://${req.host}:3000/api/users/${id}`,
+        applications: `${req.protocol}://${req.host}:3000/api/users/${id}/applications`
     }
     res.json({id, username, email, role, firstname, lastname, dateregistered, links})
 }

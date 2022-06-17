@@ -58,7 +58,7 @@ class Register extends React.Component {
     onFinish = (values) => {
         console.log('Received values form: ', values);
         const { confirm, ...data } = values; // ignore the 'confirm' value
-        fetch('https://localhost:3000/api/users', {
+        fetch('http://142.93.36.156:3000/api/users', {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

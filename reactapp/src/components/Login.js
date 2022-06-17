@@ -37,7 +37,7 @@ class Login extends React.Component {
     login(values) {
         const {username, password} = values;
         console.log(`logging in user: ${username}`)
-        fetch('http://localhost:3000/api/users/login', {
+        fetch('http://142.93.36.156:3000/api/users/login', {
             method: "POST",
             headers: {
                 "Authorization": "Basic " + window.btoa(username + ":" + password)

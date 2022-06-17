@@ -34,7 +34,7 @@ class Application extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        fetch(`https://localhost:3000/api/applications/${id}`, {
+        fetch(`http://142.93.36.156:3000/api/applications/${id}`, {
             method: "GET",
             headers: {
                 "Authorization": "Basic " + window.btoa(this.context.user.username + ":" + this.context.user.password)
@@ -61,7 +61,7 @@ class Application extends React.Component {
     }
 
     onFinish = (value) => {
-        fetch(`https://localhost:3000/api/applications/${this.props.match.params.id}`, {
+        fetch(`http://142.93.36.156:3000/api/applications/${this.props.match.params.id}`, {
             method: "PUT",
             body: JSON.stringify(value),
             headers: {
@@ -82,7 +82,7 @@ class Application extends React.Component {
     }
 
     setStatus = (value) => {
-        fetch(`https://localhost:3000/api/applications/${this.props.match.params.id}`, {
+        fetch(`http://142.93.36.156:3000/api/applications/${this.props.match.params.id}`, {
             method: "PUT",
             body: JSON.stringify(value),
             headers: {
